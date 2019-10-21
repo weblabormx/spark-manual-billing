@@ -1,0 +1,43 @@
+{
+    "name": "weblabormx/spark-manual-billing",
+    "description": "A package to add manual billing to Laravel Spark",
+    "keywords": [
+        "laravel",
+        "spark"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carlos Escobar",
+            "email": "carlosescobar@weblabor.mx"
+        }
+    ],
+    "require": {
+        "laravel/spark-aurelius": "*",
+        "laracasts/flash": ">=3",
+        "laravelcollective/html": ">=5"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeblaborMx\\SparkManualBilling\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "WeblaborMx\\SparkManualBilling\\SparkManualBillingServiceProvider"
+            ],
+            "aliases": {
+                "SparkManualBilling": "WeblaborMx\\SparkManualBilling\\SparkManualBilling"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
