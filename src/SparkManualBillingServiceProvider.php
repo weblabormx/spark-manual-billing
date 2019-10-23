@@ -5,6 +5,7 @@ namespace WeblaborMx\SparkManualBilling;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use WeblaborMx\SparkManualBilling\Console\Commands\InstallCommand;
 
 class SparkManualBillingServiceProvider extends ServiceProvider
 {
@@ -37,5 +38,23 @@ class SparkManualBillingServiceProvider extends ServiceProvider
         Blade::directive('smb_active', function ($route) {
             return "<?php if(request()->is('$route/*') || request()->is('$route')) echo 'active';?>";
         });
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        if (! defined('SPARKMB_PATH')) {
+            define('SPARKMB_PATH', realpath(__DIR__.'/../'));
+        }
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                InstallCommand::class
+            ]);
+        }
     }
 }

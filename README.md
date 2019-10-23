@@ -16,7 +16,8 @@ We would like to implement more features for this packages, with your support or
 
 ## Documentation
 ### Installation
-- Copy data from `install-stubs/resources/views` to `resources/views` this files will update some views from laravel spark, please do it carefully in case you have modified views from laravel spark
+- Execute `composer require weblabormx/spark-manual-billing`
+- Install executing the next command `php artisan spark:manual-billing`, this command will edit some spark views.
 
 ### Disable Suscriptions
 
