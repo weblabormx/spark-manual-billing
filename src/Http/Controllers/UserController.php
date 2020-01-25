@@ -32,7 +32,7 @@ class UserController extends Controller
         \Validator::make($request->all(), $rules)->validate();
         User::create($request->all());
         flash('User created successfully')->success();
-        return redirect('spark/kiosk/users');
+        return redirect('spark/kiosk/crud/users');
     }
 
     public function edit(User $user)

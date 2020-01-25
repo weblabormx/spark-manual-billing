@@ -80,7 +80,7 @@ class TeamController extends Controller
         });
 
         flash('New suscription created successfully')->success();
-        return redirect('spark/kiosk/teams');
+        return redirect('spark/kiosk/crud/teams');
     }
 
     public function freeTrial(Team $team)
