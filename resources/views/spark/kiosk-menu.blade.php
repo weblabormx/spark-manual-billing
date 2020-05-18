@@ -77,7 +77,7 @@
         <li class="nav-item ">
             <a class="nav-link @smb_active(spark/kiosk/crud/teams)" href="/spark/kiosk/crud/teams">
                 <i class="fa fa-users icon-20 fa-lg fa-icon"></i>
-                {{__('Teams ')}}
+                {{__('Teams')}}
             </a>
         </li>
     </ul>

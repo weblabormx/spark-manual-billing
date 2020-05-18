@@ -4,8 +4,8 @@
     <div class="card card-default" style="border: 0px;">
         <div class="card-body">
             {!! Form::open(['url' => request()->url(), 'method' => 'get']) !!}
-                {!! Form::text('search', null, ['placeholder' => 'Search', 'class' => 'form-control', 'autocomplete' => 'off']) !!}
-                {!! Form::submit('Search', ['class'=>'btn btn-sm btn-outline-dark position-absolute', 'style' => 'top: 25px; right: 25px;']) !!}
+                {!! Form::text('search', null, ['placeholder' => __('Search'), 'class' => 'form-control', 'autocomplete' => 'off']) !!}
+                {!! Form::submit(__('Search'), ['class'=>'btn btn-sm btn-outline-dark position-absolute', 'style' => 'top: 25px; right: 25px;']) !!}
             {!! Form::close() !!}
         </div>
     </div>
@@ -21,9 +21,9 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Name</th>
-                        <th>E-Mail Address</th>
-                        <th>Teams</th>
+                        <th>{{__('Name')}}</th>
+                        <th>{{__('E-Mail Address')}}</th>
+                        <th>{{__('Teams')}}</th>
                         <th></th>
                     </tr>
                 </thead>
