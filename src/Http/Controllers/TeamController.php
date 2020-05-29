@@ -79,7 +79,7 @@ class TeamController extends Controller
             $message->attachData($pdf['output'], $pdf['file_name']);
         });
 
-        flash('New suscription created successfully')->success();
+        flash(__(':name created successfully', ['name' => __('Suscription')]))->success();
         return redirect('spark/kiosk/crud/teams');
     }
 
@@ -104,7 +104,7 @@ class TeamController extends Controller
         // Save data
         $team->trial_ends_at = $start_date->addDays($request->days)->format('Y-m-d H:i:s');
         $team->save();
-        flash('Free trial added successfully')->success();
+        flash(__(':name created successfully', ['name' => __('Free Trial')]))->success();
         return redirect('spark/kiosk/crud/teams');
     }
 

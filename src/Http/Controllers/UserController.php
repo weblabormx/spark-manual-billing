@@ -3,6 +3,7 @@
 namespace WeblaborMx\SparkManualBilling\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UserController extends Controller
@@ -27,11 +28,15 @@ class UserController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:254|unique:users,email',
-            'password_raw' => 'required|string|min:6'
+            'password' => 'required|string|min:6'
         ];
         \Validator::make($request->all(), $rules)->validate();
-        User::create($request->all());
-        flash('User created successfully')->success();
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        flash(__(':name created successfully', ['name' => __('User')]))->success();
         return redirect('spark/kiosk/crud/users');
     }
 
@@ -53,7 +58,7 @@ class UserController extends Controller
             unset($requests['password_raw']);
         }
         $user->update($requests);
-        flash('User updated successfully')->success();
+        flash(__(':name updated successfully', ['name' => __('User')]))->success();
         return back();
     }
 }

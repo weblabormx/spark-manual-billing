@@ -13,6 +13,6 @@
 <div class="form-group row">
     <label for="action_url" class="col-md-4 col-form-label text-md-right">{{__('Password')}}</label>
     <div class="col-md-6">
-        {!! Form::password('password_raw', ['class' => 'form-control']) !!}
+        {!! Form::password('password', ['class' => 'form-control']) !!}
     </div>
 </div>
