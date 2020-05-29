@@ -5,14 +5,14 @@
     @include('spark-manual-billing::errors')
     <div class="card card-default">
         <div class="card-header">
-            {{__('Create User')}}
+            {{__('Create')}} {{__('User')}}
         </div>
         <div class="card-body">
             {!! Form::open(['url' => '/spark/kiosk/crud/users']) !!}
                 @include('spark-manual-billing::users.partial-form')
                 <div class="form-group row">
                     <div class="offset-md-4 col-md-6">
-                        {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
+                        {!! Form::submit(__('Create'), ['class'=>'btn btn-primary']) !!}
                     </div>
                 </div>
             {!! Form::close() !!}
