@@ -4,13 +4,19 @@ namespace WeblaborMx\SparkManualBilling\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\User;
 
 class UserController extends Controller
 {
+    private $user_model;
+
+    public function __construct()
+    {
+        $this->user_model = config('auth.providers.users.model');
+    }
+
     public function index(Request $request)
     {
-        $users = User::withCount('teams');
+        $users = $this->user_model::withCount('teams');
         if($request->filled('search')) {
             $users = $users->where('name', 'like', $request->search.'%')->orWhere('email', 'like', $request->search.'%');
         }
@@ -31,7 +37,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6'
         ];
         \Validator::make($request->all(), $rules)->validate();
-        $user = new User;
+        $user = new $this->user_model;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -40,12 +46,12 @@ class UserController extends Controller
         return redirect('spark/kiosk/crud/users');
     }
 
-    public function edit(User $user)
+    public function edit($user)
     {
         return view('spark-manual-billing::users.edit', compact('user'));
     }
 
-    public function update(User $user, Request $request)
+    public function update($user, Request $request)
     {
         $rules = [
             'name' => 'required|max:255',

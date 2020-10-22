@@ -9,13 +9,22 @@ use Laravel\Spark\LocalInvoice;
 use Illuminate\Http\Request;
 use Laravel\Spark\Spark;
 use Dompdf\Dompdf;
-use App\Team;
 
 class TeamController extends Controller
 {
+    private $team_model;
+
+    public function __construct()
+    {
+        $this->team_model = \App\Models\Team::class;
+        if(!class_exists($this->team_model)) {
+            $this->team_model = \App\Team::class;
+        }
+    }
+
     public function index(Request $request)
     {
-        $teams = new Team;
+        $teams = new $this->team_model;
         if($request->filled('search')) {
             $teams = $teams->where('name', 'like', $request->search.'%');
         }
@@ -28,12 +37,12 @@ class TeamController extends Controller
         return view('spark-manual-billing::teams.index', compact('teams'));
     }
 
-    public function edit(Team $team)
+    public function edit($team)
     {
         return view('spark-manual-billing::teams.edit', compact('team'));
     }
 
-    public function update(Team $team, Request $request)
+    public function update($team, Request $request)
     {
         $rules = [
             'plan' => 'required',
@@ -83,12 +92,12 @@ class TeamController extends Controller
         return redirect('spark/kiosk/crud/teams');
     }
 
-    public function freeTrial(Team $team)
+    public function freeTrial($team)
     {
         return view('spark-manual-billing::teams.free-trial', compact('team'));
     }
 
-    public function freeTrialSave(Team $team, Request $request)
+    public function freeTrialSave($team, Request $request)
     {
         $rules = [
             'days' => 'required|numeric'
@@ -108,7 +117,7 @@ class TeamController extends Controller
         return redirect('spark/kiosk/crud/teams');
     }
 
-    public function invoice(Team $team, LocalInvoice $invoice)
+    public function invoice($team, LocalInvoice $invoice)
     {
         if($invoice->team_id != $team->id) {
             abort(404);
