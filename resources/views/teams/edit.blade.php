@@ -12,7 +12,7 @@
                 <div class="form-group row">
                     <label for="announcement" class="col-md-4 col-form-label text-md-right">{{__('Plan')}}</label>
                     <div class="col-md-6">
-                        {!! Form::select('plan', Laravel\Spark\Spark::teamPlans()->pluck('name', 'id')->map(function($item) { return __($item); }), null, ['class' => 'form-control']) !!}
+                        {!! Form::select('plan', Laravel\Spark\Spark::teamPlans()->where('price', '>', 0)->pluck('name', 'id')->map(function($item) { return __($item); }), null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group row">

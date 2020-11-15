@@ -53,19 +53,24 @@ class TeamController extends Controller
 
         // Create suscription
         $active_subscription = $team->subscriptions()->active()->orderBy('ends_at', 'desc')->first();
-        if(!is_object($active_subscription)) {
-            $start_date = now();
-        } else {
+        if(is_object($active_subscription)) {
             $start_date = $active_subscription->ends_at;
+        } else if ($team->onTrial()) {
+            $start_date = $team->trial_ends_at;
+        } else {
+            $start_date = now();
         }
+        $date = $start_date->addDays($request->days)->format('Y-m-d H:i:s');
         
         $suscription = [
             'team_id' => $team->id,
             'name' => 'default',
             'stripe_id' => 'manual',
             'stripe_plan' => $request->plan,
+            'stripe_status' => 'manual',
             'quantity' => 1,
-            'ends_at' => $start_date->addDays($request->days)->format('Y-m-d H:i:s')
+            'ends_at' => $date,
+            'trial_ends_at' => $date
         ];
         TeamSubscription::create($suscription);
 

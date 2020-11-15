@@ -41,14 +41,18 @@
                                 </div>
                             </td>
                             <td>
-                                <div>{{$team->status_title}}</div>
+                                <div>
+                                    {{$team->plan_name}}
+                                    @isset($team->plan_date)
+                                        <br />
+                                        <small>{{__('Until')}} {{$team->plan_date}}</small>
+                                    @endisset
+                                </div>
                             </td>
                             <td>
-                                @if(!Str::contains($team->status_title, 'Active'))
-                                    <a class="btn btn-default btn-sm" href="/spark/kiosk/crud/teams/{{$team->id}}/edit" title="Configure subscription"><i class="fa fa-credit-card"></i></a>
-                                    @if(!Str::contains($team->status_title, 'Subscribed'))
-                                        <a class="btn btn-default btn-sm" href="/spark/kiosk/crud/teams/{{$team->id}}/free-trial" title="Extend Free Trial"><i class="fa fa-gift"></i></a>
-                                    @endif
+                                <a class="btn btn-default btn-sm" href="/spark/kiosk/crud/teams/{{$team->id}}/edit" title="{{__('Configure subscription')}}"><i class="fa fa-credit-card"></i></a>
+                                @if(!$team->subscribed())
+                                    <a class="btn btn-default btn-sm" href="/spark/kiosk/crud/teams/{{$team->id}}/free-trial" title="{{__('Extend Free Trial')}}"><i class="fa fa-gift"></i></a>
                                 @endif
                             </td>
                         </tr>

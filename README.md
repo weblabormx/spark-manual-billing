@@ -18,6 +18,7 @@ We would like to implement more features for this packages, with your support or
 ### Installation
 - Execute `composer require weblabormx/spark-manual-billing`
 - Install executing the next command `php artisan spark:manual-billing`, this command will edit some spark views.
+- Add to the teams models the next trait `WeblaborMx\SparkManualBilling\Traits\BillableExtras` to handle new attributes to get the plan name and date
 
 ### Disable Suscriptions
 
