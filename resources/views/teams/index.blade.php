@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 <div>
-                                    {{$team->plan_name}}
+                                    {{__($team->plan_name)}}
                                     @isset($team->plan_date)
                                         <br />
                                         <small>{{__('Until')}} {{$team->plan_date}}</small>
