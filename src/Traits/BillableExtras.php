@@ -15,7 +15,7 @@ trait BillableExtras
     	} else {
     		$plan = $this->sparkPlan()->name;	
     	}
-    	return __($plan);
+    	return $plan;
     }
 
     public function getPlanDateAttribute()
